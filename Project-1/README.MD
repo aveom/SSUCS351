@@ -1,5 +1,4 @@
-## Mel Aveo
-## Project-1
+## Project-1 - Mel Aveo
 
 ### 1. Which program is fastest? Is it always the fastest?
 
