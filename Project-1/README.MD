@@ -78,15 +78,17 @@ From the trials, the following observations can be made:
 The relationships of `head`, `tail`, and `next` pointers are illustrated below.
 
 #### Linked List Structure
+```text
 head
- |
- v
-+--------+       +--------+
-| Node1  | ----> | Node2  | ----> NULL
-+--------+       +--------+
-  ^                ^
-  |                |
- tail             tail
+|
+v
++--------+ +--------+
+| Node1 | ----> | Node2 | ----> NULL
++--------+ +--------+
+^ ^
+| |
+tail tail
+```
 
 
 #### Node Structure
