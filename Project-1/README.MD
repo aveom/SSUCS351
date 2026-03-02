@@ -73,7 +73,7 @@ From the trials, the following observations can be made:
     - Heap allocation (`malloc/new`) is slower but can accommodate much larger allocations.  
     - `list` adds extra per-node overhead, causing higher memory usage for smaller block sizes.
 
-### Question 6: Considering either the malloc.cpp or alloca.cpp versions of the program, generate a diagram showing two Nodes. Include in the diagram the relationship of the head, tail, and Node next pointers. ### show the size (in bytes) and structure of a Node that allocated six bytes of data include the bytes pointer, and indicate using an arrow which byte in the allocated memory it points to.
+### Question 6: Considering either the malloc.cpp or alloca.cpp versions of the program, generate a diagram showing two Nodes. Include in the diagram the relationship of the head, tail, and Node next pointers. show the size (in bytes) and structure of a Node that allocated six bytes of data include the bytes pointer, and indicate using an arrow which byte in the allocated memory it points to.
 
 The relationships of `head`, `tail`, and `next` pointers are illustrated below.
 
