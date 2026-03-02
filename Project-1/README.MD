@@ -78,8 +78,15 @@ From the trials, the following observations can be made:
 The relationships of `head`, `tail`, and `next` pointers are illustrated below.
 
 #### Linked List Structure
-head -> Node1 -> Node2 -> NULL
-tail ----------------^
+head
+ |
+ v
++--------+       +--------+
+| Node1  | ----> | Node2  | ----> NULL
++--------+       +--------+
+  ^                ^
+  |                |
+ tail             tail
 
 
 #### Node Structure
@@ -91,15 +98,14 @@ Each Node contains:
 Node1
 +----------------+
 | bytes: 0xAAA | ---> [6 bytes allocated]
-| next: Node2 |
+| next: Node2   |
 +----------------+
 
 Node2
 +----------------+
 | bytes: 0xBBB | ---> [6 bytes allocated]
-| next: NULL |
+| next: NULL    |
 +----------------+
-
 
 #### Explanation
 
