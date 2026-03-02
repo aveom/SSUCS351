@@ -92,11 +92,7 @@ v
 
 
 #### Node Structure
-
-Each Node contains:
-
-- `bytes` → pointer to allocated memory (6 bytes)
-- `next` → pointer to the next Node (or `NULL` if last Node)
+```text
 Node1
 +----------------+
 | bytes: 0xAAA | ---> [6 bytes allocated]
@@ -108,6 +104,7 @@ Node2
 | bytes: 0xBBB | ---> [6 bytes allocated]
 | next: NULL    |
 +----------------+
+```
 
 #### Explanation
 
