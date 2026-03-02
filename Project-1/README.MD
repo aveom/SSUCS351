@@ -12,7 +12,7 @@ Based on trials, **`alloca.cpp` is consistently the fastest program** across all
 | `new.out`     | avg 0.199 s           | avg 2.013 s             |
 | `list.out`    | avg 0.206 s           | avg 2.031 s             |
 
-While `alloca.cpp` is always the fastest in these experiments, the **relative performance of `list.cpp` and `new.cpp` can vary slightly** depending on the number of nodes and system memory behavior.
+While `alloca.cpp` is always the fastest, the **relative performance of `list.cpp` and `new.cpp` can vary slightly** depending on the number of nodes and system memory behavior.
 
 ### 2. Which program is slowest? Is it always the slowest?
 
@@ -22,13 +22,11 @@ For smaller list sizes (NUM_BLOCKS = 100,000), **`list.cpp` and `new.cpp` had si
 
 ### Question 3: Trend with Node Size
 
-Ran each program with nodes of 10, 100, and 1000 bytes and measured average execution times:
-
-| Node Size (bytes) | alloca | list  | malloc | new   |
-|------------------|--------|-------|--------|-------|
-| 10               | 0.069  | 0.140 | 0.089  | 0.139 |
-| 100              | 0.307  | 0.394 | 0.337  | 0.383 |
-| 1000             | 2.855  | 2.860 | 2.685  | 2.781 |
+| Node Size (bytes) | alloca (avg)  | list (avg)  | malloc (avg) | new (avg)  |
+|------------------ |---------------|-------------|--------------|------------|
+| 10                | 0.069         | 0.140       | 0.089        | 0.139      |
+| 100               | 0.307         | 0.394       | 0.337        | 0.383      |
+| 1000              | 2.855         | 2.860       | 2.685        | 2.781      |
 
 **Observations:**
 1. Execution time increases as the node size increases for all allocation methods.
@@ -75,5 +73,61 @@ From the trials, the following observations can be made:
     - Heap allocation (`malloc/new`) is slower but can accommodate much larger allocations.  
     - `list` adds extra per-node overhead, causing higher memory usage for smaller block sizes.
 
-**Conclusion**:  
-Increasing the stack size only affects programs using stack allocation (`alloca`) and does not impact heap memory. Heap allocations manage their own memory independently, and the heap break moves upward as more memory is allocated.
+### Question 6: Node Diagram for malloc.cpp
+
+The relationships of `head`, `tail`, and `next` pointers are illustrated below.
+
+#### Linked List Structure
+head -> Node1 -> Node2 -> NULL
+tail ----------------^
+
+
+#### Node Structure
+
+Each Node contains:
+
+- `bytes` → pointer to allocated memory (6 bytes)
+- `next` → pointer to the next Node (or `NULL` if last Node)
+Node1
++----------------+
+| bytes: 0xAAA | ---> [6 bytes allocated]
+| next: Node2 |
++----------------+
+
+Node2
++----------------+
+| bytes: 0xBBB | ---> [6 bytes allocated]
+| next: NULL |
++----------------+
+
+
+#### Explanation
+
+- `head` points to the first node (`Node1`), `tail` points to the last node (`Node2`).
+- Each Node’s `next` pointer links it to the following Node, forming the linked list.
+- The `bytes` pointer inside each Node points to the beginning of the dynamically allocated memory block.
+- Memory size for each block is 6 bytes as specified in the program parameters.
+
+### Question 7: Comparing Overheads
+
+- **Memory Allocation:**  
+  - `alloca` uses the stack — very fast, minimal bookkeeping.  
+  - `malloc` and `new` use the heap — slower due to heap management.  
+  - `list` allocates each Node on the heap, adding extra overhead for Node pointers and bookkeeping.
+
+- **Initialization:**  
+  - `alloca` does minimal initialization (just pointer arithmetic).  
+  - `malloc` writes to memory to initialize bytes.  
+  - `new` also calls constructors (if any), adding a small extra overhead.  
+  - `list` initializes Node structures (pointers + data), slightly more work than plain memory allocation.
+
+- **Processing (hashing):**  
+  - Identical in all programs; once memory is allocated and initialized, hashing or computation occurs in the same way.
+
+### Question 8: Significance of Node Allocation with Increasing Data Size
+
+Each Node has a fixed overhead due to its structure (pointers, metadata) and allocator bookkeeping. When the data in a Node is small, this overhead is relatively significant. As the data size increases, the fixed overhead becomes a smaller fraction of the total memory per Node.
+
+**Observation:**  
+- Small data blocks → Node overhead is significant relative to data.  
+- Large data blocks → Node overhead is negligible relative to data.
