@@ -58,14 +58,14 @@ uniform float N;
                     gl.clear(gl.COLOR_BUFFER_BIT);
                     gl.useProgram(program);
 
-                    const N = 12; // number of vertices
+                    const N = 10; // number of vertices
 
                     // Other code we'll need later, in combination with the
                     //   code above marked for later use.
                     gl.uniform1f(uN, N);
                     // gl.uniform1f(uTime, t);
 
-                    gl.drawArrays(gl.TRIANGLE_FAN, 0, N);
+                    gl.drawArrays(gl.TRIANGLE_FAN, 0, N + 2);
 
                     requestAnimationFrame(render);
                 };
