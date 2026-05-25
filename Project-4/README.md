@@ -62,7 +62,7 @@ z₀ = (0, 0)
 
 ### Output:
 
-![Julia Set](./Project-4/julia.ppm)
+![Julia Set](julia.ppm)
 
 ---
 
