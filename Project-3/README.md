@@ -1,3 +1,3 @@
 [Triangle](start.html)
-[Pac Man](polygon.html)
+[Disk](polygon.html)
 [Star](star.html)
