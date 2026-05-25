@@ -16,8 +16,8 @@ uniform float N;
     		float angle =
         	float(gl_VertexID) *
        		2.0 *
-        	3.14159 /
-        	N;
+        	3.14159265358979 /
+        	float(N);
 
     		vec2 v = vec2(
         	     cos(angle),
@@ -58,7 +58,7 @@ uniform float N;
                     gl.clear(gl.COLOR_BUFFER_BIT);
                     gl.useProgram(program);
 
-                    const N = 10; // number of vertices
+                    const N = 12; // number of vertices
 
                     // Other code we'll need later, in combination with the
                     //   code above marked for later use.
